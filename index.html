@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Download Page - Project File</title>
+    <style>
+        /* --- 1. Global & Body Styles --- */
+        :root {
+            --primary-color: #007bff; /* Blue */
+            --secondary-color: #f8f9fa; /* Light Gray */
+            --dark-color: #343a40; /* Dark Gray/Black */
+            --success-color: #28a745; /* Green */
+            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* --- 2. Container & Card Styles --- */
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 3. Header & Title Styles --- */
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .description {
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        /* --- 4. Download Button Styles --- */
+        #download-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            text-decoration: none; /* Important for the <a> tag */
+            display: inline-block;
+        }
+
+        #download-btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-2px);
+        }
+
+        #download-btn:active {
+            transform: translateY(0);
+        }
+
+        /* --- 5. Animated Loading Spinner (Hidden by default) --- */
+        .spinner {
+            display: none; /* Hidden by default, shown by JS */
+            margin: 30px auto 0;
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .spinner:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--primary-color);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* --- 6. Success Message (Hidden by default) --- */
+        #success-message {
+            display: none; /* Hidden by default, shown by JS */
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #d4edda; /* Light green background */
+            color: var(--success-color); /* Dark green text */
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>✅ Project Download Ready</h1>
+        <p class="description">
+            Click the button below to instantly download the complete
+            <b>Django Project</b> file.
+        </p>
+
+        <a id="download-btn"
+           href="assets/django_project.zip">
+           Download django_project.zip
+        </a>
+
+        <div class="spinner" id="loading-spinner"></div>
+
+        <div id="success-message">
+            🚀 Download started! Check your downloads folder.
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtn = document.getElementById('download-btn');
+            const spinner = document.getElementById('loading-spinner');
+            const successMsg = document.getElementById('success-message');
+
+            downloadBtn.addEventListener('click', function() {
+                // 1. Hide the button and show the spinner immediately on click
+                downloadBtn.style.display = 'none';
+                spinner.style.display = 'block';
+                successMsg.style.display = 'none';
+
+                // 2. The actual download is handled by the <a> tag's href attribute.
+                // We simulate a brief "loading" delay before showing the success message.
+                setTimeout(() => {
+                    spinner.style.display = 'none';
+                    successMsg.style.display = 'block';
+
+                    // OPTIONAL: After a few seconds, you could show the button again
+                    // in case the download failed or they want to try again.
+                    setTimeout(() => {
+                         // Note: We don't bring the button back in this final version
+                         // to keep the success state clean, but you could add:
+                         // downloadBtn.textContent = 'Download Again';
+                         // downloadBtn.style.display = 'inline-block';
+                    }, 5000); // 5 seconds later
+
+                }, 1500); // Simulate 1.5 seconds of "processing/loading"
+            });
+        });
+    </script>
+
+</body>
+</html>
